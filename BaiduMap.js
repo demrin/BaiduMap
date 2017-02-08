@@ -58,7 +58,11 @@ setTimeout(function () {
 function disStrictStyle(id, div, name, count) {
     div.setAttribute('id', 'circle');
     div.innerHTML = '<span class="strictAreaName">' + name + '</span>'
-        + '<span class="count">' + count + '</span>'
+                  + '<span class="count">' + count + '</span>'
+
+    div.addEventListener('click', function () {
+        map.centerAndZoom(name, 13)
+    })
 }
 
 function communityStle(id, div, name, count) {
@@ -82,25 +86,25 @@ myOverlay.prototype = new BMap.Overlay()
 myOverlay.prototype.initialize = function (map) {
     this._map = map;
     // 创建div元素，作为自定义覆盖物的容器  
-    // var div = this._div = document.createEvent('div');
-    disStrictStyle()
+    var div = this._div = document.createElement('div');
 
     //以下为执行自定义功能
     if (map.getZoom() < 15) {
+        // disStrictStyle(id,div,name,count) 区域样式函数
         disStrictStyle(this._id, div, this._name, this._count)
     }
-    map.getPanes().markerPaner.appendChild(div);
+    map.getPanes().markerPane.appendChild(div);
     return div
 }
 // 实现绘制方法   
 myOverlay.prototype.draw = function () {
     // 根据地理坐标转换为像素坐标，并设置给容器    
     var position = this._map.pointToOverlayPixel(this._center);
-    this._div.style.left = position.x - this._length / 2 + "px";
-    this._div.style.top = position.y - this._length / 2 + "px";
+    this._div.style.left = position.x - this._length / (1) + "px";
+    this._div.style.top = position.y - this._length / (4) + "px";
 }
 
 //添加自定义覆盖物
-var myLay = new myOverlay(map.getCenter(), 100, "red");
+var myLay = new myOverlay('kjalsfd1234d3001',map.getCenter(118.120, 24.510),'海沧区',6, 200, "red");
 map.addOverlay(myLay);
 //-----自定义覆盖物 构造函数结束-----
