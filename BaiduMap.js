@@ -28,7 +28,7 @@
     //-----行政区域描边开始-----
 
     //(
-    function getAreaStorke() {
+    function getAreaStroke() {
         var adminAreas = ['思明区', '湖里区', '海沧区', '集美区', '翔安区', '同安区'];
         for (var i = adminAreas.length - 1; i >= 0; i--) {
             var boundary = new BMap.Boundary();   //获取行政区域边界
@@ -37,8 +37,8 @@
                 var count = rs.boundaries.length;
                 for (var i = 0; i < count; i++) {
                     var ply = new BMap.Polygon(rs.boundaries[i], {
-                        storkeWeight: 3,
-                        storkeColor: 'red'
+                        strokeWeight: 3,
+                        strokeColor: 'red'
                     });
                     ply.setFillOpacity('0.1');   //区域背景透明度
                     map.addOverlay(ply);
@@ -49,7 +49,7 @@
     //)
 
     setTimeout(function () {
-        getAreaStorke()
+        getAreaStroke()
     }, 1000);
 
     //-----行政区域描边结束-----
@@ -65,7 +65,7 @@
     function disStrictStyle(id, div, name, count) {
         div.setAttribute('id', 'circle');
         div.innerHTML = '<span class="strictAreaName">' + name + '</span>'
-            + '<span class="count">' + count + '</span>'
+                      + '<span class="count">' + count + '</span>'
 
         div.addEventListener('click', function () {
             map.centerAndZoom(name, 13)
@@ -75,7 +75,7 @@
     function communityStyle(id, div, name, count) {
         div.setAttribute('id', 'square');
         div.innerHTML = '<span class="communityName">' + name + '</span>'
-            + '<span class="count">' + count + '</span>'
+                      + '<span class="count">' + count + '</span>'
     }
 
     //-----自定义覆盖物 构造函数开始-----
@@ -112,7 +112,7 @@
     }
 
     //添加自定义覆盖物
-    var myLay = new myOverlay('kjalsfd1234d3001', map.getCenter(118.120, 24.510), '海沧区', 6, 200, "red");
+    var myLay = new myOverlay('kjalsfd1234d3001', map.getCenter(118.120, 24.510), '海沧', 6, 200, "red");
     map.addOverlay(myLay);
     console.log(myLay)
     //-----自定义覆盖物 构造函数结束-----
